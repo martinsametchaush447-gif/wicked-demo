@@ -9,23 +9,23 @@
   <meta name="description" content="Wicked Motorcycles design demo. An independent motorcycle workshop in Hallow, Worcestershire. You ride … we do the rest.">
   <title>Wicked Motorcycles — Design demo</title>
   <style>:root{--black:#090a0a;--bone:#e9e6df;--muted:#b7b5ae;--ember:#efa05b;color-scheme:dark;font-family:"Segoe UI",Arial,sans-serif;color:var(--bone);background:var(--black);font-synthesis:none}
-.hero{height:100svh;position:relative;overflow:hidden;background:#090a0a}
+.hero{height:calc(100svh + var(--hero-scroll,0px));position:relative;background:#090a0a}
+.hero-stage{position:sticky;top:0;height:100svh;overflow:hidden}
 .hero-media{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(100%,177.777778svh);aspect-ratio:16/9;container-type:inline-size}
-.hero-last,.hero-last img,#hero-video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
-#hero-video{visibility:hidden}.video-active #hero-video{visibility:visible}.last-frame #hero-video{visibility:hidden}
-.scene-cta{position:absolute;inset:0;text-align:center;opacity:1;visibility:visible;transition:opacity .35s ease}
-.video-active:not(.quote-ready) .scene-cta{opacity:0;visibility:hidden;pointer-events:none}
+.hero-last,.hero-last img,#hero-sequence{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
+#hero-sequence{visibility:hidden}.sequence-active #hero-sequence{visibility:visible}.last-frame #hero-sequence{visibility:hidden}
+.scene-cta{position:absolute;inset:0;text-align:center;opacity:var(--quote-opacity,1);visibility:visible}
+.sequence-active:not(.quote-ready) .scene-cta{opacity:0;visibility:hidden;pointer-events:none}
 .scene-cta .button{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:40%;height:14.577778%;min-height:44px;padding:0;gap:1.6cqw;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-size:3.54cqw;font-weight:900;line-height:1;text-transform:uppercase}
 .scene-cta p{position:absolute;left:0;right:0;bottom:calc(50% + 4.1cqw + 22px);margin:0;font-size:clamp(18px,1.5cqw,28px);color:var(--bone)}
 .scene-cta .direction-arrow{width:.3em;height:.3em;border-width:.06em}
-.replay{position:absolute;left:50%;top:calc(50% + 4.1cqw + 14px);transform:translateX(-50%);min-height:44px;padding:10px 16px;border:0;background:none;color:var(--muted);font-size:13px;text-decoration:underline;text-underline-offset:4px}
-.hero-copy{position:absolute;left:6vw;right:6vw;bottom:112px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;opacity:0;visibility:hidden;transition:opacity .5s ease,visibility .5s}
-.video-active:not(.opening-finished) .hero-copy{opacity:1;visibility:visible}
+.hero-copy{position:absolute;left:6vw;right:6vw;bottom:112px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;opacity:0;pointer-events:none}
+.hero-copy a{pointer-events:auto}
 .hero-location{color:var(--bone);font-size:clamp(18px,1.55vw,24px);line-height:1.35;margin:18px 0 0}.phone-break{display:none}
 .hero-intro{width:260px}.hero-intro p:first-child{font-size:18px;line-height:1.5;margin-bottom:14px}.hero-intro p:nth-child(2){font-size:14px;color:var(--muted);margin-bottom:8px}.hero-intro .text-link{font-size:13px}
-.hero[data-version=phone] .hero-media{width:min(100%,56.25svh);aspect-ratio:9/16}.hero[data-version=phone] .scene-cta .button{width:88%;height:12.375%;font-size:10.77cqw;gap:5.6cqw}.hero[data-version=phone] .scene-cta p{bottom:calc(50% + 11cqw + 22px);font-size:5.38cqw}.hero[data-version=phone] .replay{top:calc(50% + 11cqw + 14px)}
+.hero[data-version=phone] .hero-media{width:min(100%,56.25svh);aspect-ratio:9/16}.hero[data-version=phone] .scene-cta .button{width:88%;height:12.375%;font-size:10.77cqw;gap:5.6cqw}.hero[data-version=phone] .scene-cta p{bottom:calc(50% + 11cqw + 22px);font-size:5.38cqw}
 @media(max-width:750px){.hero-copy{left:24px;right:24px;bottom:100px;display:block}.hero-copy h1{font-size:clamp(42px,12vw,82px)}.hero-location{font-size:19px;margin-top:15px}.phone-break{display:block}.hero-intro{margin-top:16px;width:auto}.hero-intro p:first-child{font-size:14px;margin:0}.hero-intro p:first-child br{display:none}.hero-intro p:nth-child(2){font-size:12px;margin:6px 0}.hero-intro .text-link{font-size:12px}}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}a,button{touch-action:manipulation}button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--ember);outline-offset:5px}p{font-size:16px;line-height:1.65;margin:0 0 20px}h1,h2,h3{margin:0}h1,h2,.ride-copy>p{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-weight:900;line-height:1.05;letter-spacing:0;text-transform:uppercase}h1{font-size:clamp(56px,8vw,120px)}h2{font-size:clamp(44px,5vw,76px)}.section{padding:96px 6vw}.section-kicker{display:none}.text-link{display:inline-flex;align-items:center;gap:24px;min-height:44px;border-bottom:1px solid #88877f;font-size:14px}.button{display:inline-flex;align-items:center;justify-content:center;gap:30px;background:var(--ember);color:#151515;border:0;border-radius:0;min-height:60px;padding:20px 28px;font-weight:700}.button:hover{background:#f4b783}.direction-arrow{display:inline-block;width:10px;height:10px;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:rotate(45deg);flex-shrink:0}.skip-link{position:fixed;top:-80px;left:24px;z-index:100;padding:16px;background:var(--bone);color:#080909}.skip-link:focus{top:12px}
+*{box-sizing:border-box}html{scroll-behavior:auto;scroll-padding-top:24px}body{margin:0}a{color:inherit;text-decoration:none}button,input,textarea{font:inherit}a,button{touch-action:manipulation}button{cursor:pointer}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--ember);outline-offset:5px}p{font-size:16px;line-height:1.65;margin:0 0 20px}h1,h2,h3{margin:0}h1,h2,.ride-copy>p{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;font-weight:900;line-height:1.05;letter-spacing:0;text-transform:uppercase}h1{font-size:clamp(56px,8vw,120px)}h2{font-size:clamp(44px,5vw,76px)}.section{padding:96px 6vw}.section-kicker{display:none}.text-link{display:inline-flex;align-items:center;gap:24px;min-height:44px;border-bottom:1px solid #88877f;font-size:14px}.button{display:inline-flex;align-items:center;justify-content:center;gap:30px;background:var(--ember);color:#151515;border:0;border-radius:0;min-height:60px;padding:20px 28px;font-weight:700}.button:hover{background:#f4b783}.direction-arrow{display:inline-block;width:10px;height:10px;border-top:2px solid currentColor;border-right:2px solid currentColor;transform:rotate(45deg);flex-shrink:0}.skip-link{position:fixed;top:-80px;left:24px;z-index:100;padding:16px;background:var(--bone);color:#080909}.skip-link:focus{top:12px}
 .header{position:absolute;inset:0 0 auto;z-index:10;height:112px;padding:8px 6vw;display:flex;align-items:center;gap:32px;padding-top:env(safe-area-inset-top)}.wordmark{display:block;flex-shrink:0}.wordmark img{width:88px;height:88px;display:block;object-fit:contain}.header nav{display:flex;margin-left:auto;gap:38px;font-size:14px;align-items:center}.header nav a{display:flex;align-items:center;gap:16px;min-height:44px}.demo-label{font-size:11px;color:var(--muted)}
 .quote{background:#e0ddd5;color:#202221;display:grid;grid-template-columns:1fr 1fr;gap:12%}.quote-details>p{margin-top:28px;color:#51544f}.form-notice{font-size:12px;color:#53564f;margin-bottom:28px}.status-dot{display:none}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:24px}label{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;font-size:14px}input,textarea{font-size:16px;width:100%;border:1px solid #73766c;border-radius:0;background:#f0eee7;color:#202221;padding:14px 12px}input::placeholder,textarea::placeholder{color:#62665c;font-size:14px}textarea{resize:vertical;min-height:120px}form .button{width:100%;background:#242725;color:#f0eee7}#form-status{font-size:14px;margin:16px 0 0;min-height:24px}a[href^="tel:"]{white-space:nowrap;letter-spacing:normal}#form-status a{text-decoration:underline}
 .workshop{background:#151716}.workshop-heading{display:grid;grid-template-columns:1.2fr 1fr;gap:12%;align-items:end;margin-bottom:48px}.workshop-heading>div{max-width:390px}.workshop-heading p:last-child{color:var(--muted);margin:0}.workshop-photo{margin:0}.workshop-photo img{display:block;width:100%;height:560px;object-fit:cover}.workshop-photo figcaption{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-top:14px}.workshop-real{display:grid;grid-template-columns:1fr 1.5fr;gap:48px;margin-top:64px}.workshop-real h3{font-size:27px;margin-bottom:20px}.workshop-real p{color:var(--muted);max-width:350px}.photo-note{font-size:12px;color:var(--muted)}.workshop-snaps{display:flex;gap:18px;align-items:start}.workshop-snaps figure{margin:0;flex:1;min-width:0}.workshop-snaps img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;display:block}.workshop-snaps figcaption{font-size:12px;margin-top:12px}.services{background:#dedbd3;color:#242725}.services-layout{display:grid;grid-template-columns:1fr 1fr;gap:10%}.services-layout>div p{margin-top:28px;max-width:350px;color:#51544f}.service-list{padding:0;list-style:none;margin:0}.service-list li{padding:20px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;font-size:21px}.service-list li:first-child{padding-top:0}.service-list .direction-arrow{width:7px;height:7px}.reviews{padding-top:72px;padding-bottom:72px}.reviews h2{font-size:clamp(40px,4vw,58px)}.review-space{display:flex;align-items:center;gap:28px;margin-top:36px}.google-g{font-size:40px;color:var(--muted)}.review-space h3{font-size:18px;font-weight:500}.review-space p{font-size:14px;color:var(--muted);margin:8px 0 0}.placeholder-tag{margin-left:auto;font-size:11px;color:var(--muted)}
@@ -52,12 +52,14 @@ form .button:hover{background:#3c413d}
 
   <main id="main">
     <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="hero-stage">
       <div class="hero-media">
         <picture class="hero-last"><source media="(orientation: portrait)" srcset="hero-phone-last.jpg"><img src="hero-desktop-last.jpg" alt="" width="1920" height="1080"></picture>
-        <video id="hero-video" muted playsinline preload="none" aria-hidden="true"></video>
-        <div class="scene-cta"><p>Your next ride starts here.</p><a class="button" id="hero-quote" href="#quote">Get a Quote <span class="direction-arrow" aria-hidden="true"></span></a><button class="replay" type="button">Replay</button></div>
+        <canvas id="hero-sequence" aria-hidden="true"></canvas>
+        <div class="scene-cta"><p>Your next ride starts here.</p><a class="button" id="hero-quote" href="#quote">Get a Quote <span class="direction-arrow" aria-hidden="true"></span></a></div>
       </div>
       <div class="hero-copy"><div><h1 id="hero-title">You ride.<br>We do the rest.</h1><p class="hero-location">Independent spirit.<br class="phone-break"> Worcestershire roots.</p></div><div class="hero-intro"><p>From the everyday ride <br>to the one of a kind.</p><p>Proper work. By a true mechanic.</p><a class="text-link" href="#quote">Let&rsquo;s talk about your bike <span class="direction-arrow" aria-hidden="true"></span></a></div></div>
+      </div>
     </section>
 
     <section class="quote section" id="quote" aria-labelledby="quote-title"><div class="quote-details"><div class="section-kicker">Let’s talk bikes</div><h2 id="quote-title">What’s your<br>bike’s story?</h2><p>Tell us what’s going on.<br>We’ll take it from there.</p></div>
@@ -101,62 +103,118 @@ form .button:hover{background:#3c413d}
     <span>Design demo · Worcestershire</span>
   </footer>
   <a class="mobile-call" href="tel:+447367927187"><span>Call Wicked</span><span>+44 7367 927187</span></a>
-  <script>(() => {
+  <script>﻿(() => {
+  const PHONE_SCROLL_PX = 2600;
+  const PC_SCROLL_PX = 800;
+  const FRAME_COUNT = 150;
   const hero = document.querySelector('.hero');
-  const video = document.querySelector('#hero-video');
+  const canvas = document.querySelector('#hero-sequence');
+  const context = canvas.getContext('2d');
   const quote = document.querySelector('#hero-quote');
-  const replay = document.querySelector('.replay');
+  const opening = document.querySelector('.hero-copy');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const version = innerWidth < innerHeight ? 'phone' : 'desktop';
+  const distance = version === 'phone' ? PHONE_SCROLL_PX : PC_SCROLL_PX;
   hero.dataset.version = version;
-  const lastFrame = `hero-${version}-last.jpg`;
-  let fallbackTimer;
-  let generation = 0;
+  hero.style.setProperty('--hero-scroll', `${distance}px`);
+  // Keep the chosen shape even if the device rotates during loading.
+  document.querySelector('.hero-last img').src = `hero-${version}-last.jpg`;
+  document.querySelector('.hero-last source').remove();
+  canvas.width = version === 'phone' ? 720 : 1280;
+  canvas.height = version === 'phone' ? 1280 : 720;
+  const frames = new Map();
+  const requested = new Set();
+  let activeLoads = 0;
+  let target = 0;
+  let current = 0;
+  let drawn = -1;
+  let animation = 0;
+  let failed = false;
 
-  // Both assets form at 94% of the 8.5-second story; the remaining fire burns out.
-  const revealAt = 7.99;
-  function reveal() {
-    hero.classList.add('quote-ready', 'opening-finished');
-    quote.tabIndex = 0;
-    replay.tabIndex = 0;
-  }
   function fallback() {
-    generation++;
-    clearTimeout(fallbackTimer);
-    video.pause();
-    video.poster = lastFrame;
+    failed = true;
     hero.classList.add('last-frame');
-    reveal();
+    hero.style.setProperty('--hero-scroll', '0px');
+    updateCopy(1);
   }
-  async function play(userRequested = false) {
-    if (motion.matches && !userRequested) { fallback(); return; }
-    const attempt = ++generation;
-    hero.classList.remove('quote-ready', 'opening-finished', 'last-frame');
-    hero.classList.add('video-active');
-    quote.tabIndex = replay.tabIndex = -1;
-    video.poster = `hero-${version}-poster.jpg`;
-    video.muted = true;
-    if (!video.getAttribute('src')) video.src = `hero-${version}.mp4`;
-    video.currentTime = 0;
-    clearTimeout(fallbackTimer);
-    // A stalled or unresolved play promise must never hide the action indefinitely.
-    fallbackTimer = setTimeout(fallback, 10000);
-    try {
-      await video.play();
-      if (attempt !== generation) return;
-      if (motion.matches && !userRequested) fallback();
-    } catch {
-      if (attempt === generation) fallback();
+
+  function updateCopy(progress) {
+    const openingOpacity = 1 - Math.min(1, Math.max(0, (progress - .25) / .08));
+    const quoteOpacity = Math.min(1, Math.max(0, (progress - .966) / .024));
+    opening.style.opacity = openingOpacity;
+    opening.inert = openingOpacity === 0;
+    hero.style.setProperty('--quote-opacity', quoteOpacity);
+    hero.classList.toggle('quote-ready', quoteOpacity > 0);
+    quote.tabIndex = quoteOpacity > 0 ? 0 : -1;
+  }
+
+  function drawClosest() {
+    let nearest = -1;
+    for (const index of frames.keys()) {
+      if (nearest < 0 || Math.abs(index - current) < Math.abs(nearest - current)) nearest = index;
     }
+    if (nearest < 0 || nearest === drawn || failed) return;
+    context.drawImage(frames.get(nearest), 0, 0, canvas.width, canvas.height);
+    drawn = nearest;
+    hero.dataset.frame = nearest + 1;
   }
-  video.addEventListener('timeupdate', () => {
-    if (video.currentTime >= 1.2) hero.classList.add('opening-finished');
-    if (video.currentTime >= revealAt) reveal();
-  });
-  video.addEventListener('ended', () => { clearTimeout(fallbackTimer); reveal(); });
-  video.addEventListener('error', fallback);
-  replay.addEventListener('click', () => play(true));
+
+  function loadFrame(index) {
+    requested.add(index);
+    activeLoads++;
+    const image = new Image();
+    image.fetchPriority = index === 0 ? 'high' : 'low';
+    const timer = setTimeout(() => { if (!failed) fallback(); }, 12000);
+    image.onload = () => {
+      clearTimeout(timer);
+      activeLoads--;
+      if (failed) return;
+      frames.set(index, image);
+      drawClosest();
+      loadNearest();
+    };
+    image.onerror = () => { clearTimeout(timer); activeLoads--; fallback(); };
+    image.src = `frames-${version}/${String(index + 1).padStart(4, '0')}.jpg`;
+  }
+
+  function loadNearest() {
+    if (failed || !frames.has(0)) return;
+    const centre = Math.round(target);
+    // Reprioritise pending work on every scroll; only four requests can be in flight.
+    const pending = Array.from({length: FRAME_COUNT}, (_, index) => index)
+      .filter(index => !requested.has(index))
+      .sort((a, b) => Math.abs(a - centre) - Math.abs(b - centre));
+    while (activeLoads < 4 && pending.length) loadFrame(pending.shift());
+  }
+
+  function tick() {
+    animation = 0;
+    if (failed) return;
+    const progress = Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / distance));
+    target = progress * (FRAME_COUNT - 1);
+    current += (target - current) * .45;
+    if (Math.abs(target - current) < .05) current = target;
+    hero.dataset.progress = String(current / (FRAME_COUNT - 1));
+    drawClosest();
+    updateCopy(current / (FRAME_COUNT - 1));
+    loadNearest();
+    if (current !== target) animation = requestAnimationFrame(tick);
+  }
+
+  function schedule() {
+    if (!animation && !failed) animation = requestAnimationFrame(tick);
+  }
+  addEventListener('scroll', schedule, {passive: true});
+  addEventListener('resize', schedule);
   motion.addEventListener('change', () => { if (motion.matches) fallback(); });
+  if (!context || motion.matches) fallback();
+  else {
+    hero.classList.add('sequence-active');
+    updateCopy(0);
+    loadFrame(0);
+    schedule();
+  }
+
   document.querySelector('#quote-form').addEventListener('submit', event => {
     event.preventDefault();
     const status = document.querySelector('#form-status');
@@ -166,7 +224,6 @@ form .button:hover{background:#3c413d}
     phone.textContent = '+44 7367 927187';
     status.append(phone);
   });
-  play();
 })();
 </script>
 </body>
